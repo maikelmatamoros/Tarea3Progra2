@@ -12,18 +12,14 @@ public class Tarea3Progra2 extends JPanel {
         this.setPreferredSize(new Dimension(800, 600));
     } // constructor
 
-    private int numAleatorio(int n) {
+    private int numRandom(int n) {
         return (int) (Math.random() * n) + 1;
-    }
+    } // numRandom
 
     private void draw(Graphics g) {
         for (int i = 0; i < 1000; i++) {
-            g.setColor(new Color(numAleatorio(255), numAleatorio(255), numAleatorio(255)));
-            int x0 = (int) (Math.random() * 800 + 1);
-            int y0 = (int) (Math.random() * 600 + 1);
-            int x1 = (int) (Math.random() * 800 + 1);
-            int y1 = (int) (Math.random() * 600 + 1);
-            linearFunction(g, numAleatorio(800), numAleatorio(600), numAleatorio(800), numAleatorio(600));
+            g.setColor(new Color(numRandom(255), numRandom(255), numRandom(255)));
+            linearFunction(g, numRandom(800), numRandom(600), numRandom(800), numRandom(600));
         } // for
     } // draw
 
