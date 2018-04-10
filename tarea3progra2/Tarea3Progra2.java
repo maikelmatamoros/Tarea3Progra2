@@ -73,6 +73,8 @@ public class Tarea3Progra2 extends JPanel {
     }
 
     public static void main(String[] args) {
+        System.out.println("Hola Mundo Yer");
+        
         JFrame window = new JFrame("Graphing Function");
         window.setContentPane(new Tarea3Progra2());
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
