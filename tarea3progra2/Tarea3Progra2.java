@@ -25,7 +25,6 @@ public class Tarea3Progra2 extends JPanel {
 
     private void linearFunction(Graphics g, double x0, double y0, double x1, double y1) {
         double dx = x1 - x0;
-        g.drawLine((int) x0, (int) y0, (int) x1, (int) y1);
         if (dx != 0) {
             double m = (y0 - y1) / (x0 - x1);
             double b = y0 - ((y0 - y1) / (x0 - x1)) * x0;
