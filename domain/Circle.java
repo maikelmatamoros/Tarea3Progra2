@@ -20,8 +20,7 @@ public class Circle extends Thread {
     private double originY;
     private double finalX;
     private double finalY;
-    private Thread thread;
-
+    
     public Circle() {
         this.originX = new Random().nextInt(800 - 20);
         this.originY = new Random().nextInt(600 - 20);
@@ -31,38 +30,39 @@ public class Circle extends Thread {
     }
 
     public void draw(GraphicsContext gc) {
-        gc.clearRect(0, 0, 800, 600);
+
         gc.fillRect(originX, originY, 20, 20);
 
     }//draw
 
+    private int velocidad=(int) (Math.random() * 10 + 1);
     @Override
     public void run() {
         while (true) {
             try {
-                this.thread.sleep(1);
+                Thread.sleep(this.velocidad);
                 double dx = finalX - originX;
-            if (dx != 0) {
-                double m = (originY - finalY) / (originX - finalX);
-                double b = originY - ((originY - finalY) / (originX - finalX)) * originX;
-                if (finalX > originX) {
-                    dx = 1;
-                } else {
-                    dx = -1;
+                if (dx != 0) {
+                    double m = (originY - finalY) / (originX - finalX);
+                    double b = originY - ((originY - finalY) / (originX - finalX)) * originX;
+                    if (finalX > originX) {
+                        dx = 1;
+                    } else {
+                        dx = -1;
+                    }
+
+                    originX += dx;
+                    originY = Math.round(m * originX + b);
+
+                } // if
+                if (originX == finalX && originY == finalY) {
+                    this.finalX = new Random().nextInt(800 - 20);
+                    this.finalY = new Random().nextInt(600 - 20);
                 }
-
-                originX += dx;
-                originY = Math.round(m * originX + b);
-
-            } // if
-            if (originX == finalX && originY == finalY) {
-                this.finalX = new Random().nextInt(800 - 20);
-                this.finalY = new Random().nextInt(600 - 20);
-            }
             } catch (InterruptedException ex) {
                 Logger.getLogger(Circle.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
     }
 }
