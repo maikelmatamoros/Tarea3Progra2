@@ -1,5 +1,6 @@
 package tarea3progra2;
 
+import domain.Circle;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,6 +48,8 @@ public class Window extends Application implements Runnable {
                 System.exit(0);
             }
         });
+        circle1.start();
+        circle2.start();
     }
 
     private void myDraw(GraphicsContext gc) {
@@ -56,7 +59,7 @@ public class Window extends Application implements Runnable {
         ySalida = 0;
         while (true) {
             xLlegada = rand.nextInt(WIDTH - 100) + 1;
-            yLllegada = rand.nextInt(WIDTH - 100) + 1;
+            yLllegada = rand.nextInt(HEIGHT - 100) + 1;
             trayectoria(gc, xSalida, ySalida, xLlegada, yLllegada);
             xSalida = xLlegada;
             ySalida = yLllegada;
@@ -87,11 +90,29 @@ public class Window extends Application implements Runnable {
             }
         } // if
     }// linearFunction
+    Circle circle1 = new Circle();
+    Circle circle2 = new Circle();
+
+
 
     @Override
     public void run() {
+        
         GraphicsContext gc = this.canvas.getGraphicsContext2D();
-        myDraw(gc);
+        while (true) {
+            circle1.draw(gc);
+            circle2.draw(gc);
+            try {
+                Thread.sleep(1000 / 30);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
+
+    public static void main(String arg[]) {
+        launch(arg);
     }
 
 }
