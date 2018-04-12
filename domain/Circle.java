@@ -9,6 +9,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -20,22 +21,23 @@ public class Circle extends Thread {
     private double originY;
     private double finalX;
     private double finalY;
+    private int velocidad;
+    private Color color;
     
     public Circle() {
         this.originX = new Random().nextInt(800 - 20);
         this.originY = new Random().nextInt(600 - 20);
         this.finalX = new Random().nextInt(800 - 20);
         this.finalY = new Random().nextInt(600 - 20);
-
+        this.velocidad=(int) (Math.random() * 10) + 5;
+        this.color=Color.rgb(new Random().nextInt(255), new Random().nextInt(255), new Random().nextInt(255));
     }
 
     public void draw(GraphicsContext gc) {
-
+        gc.setFill(this.color);
         gc.fillRect(originX, originY, 20, 20);
-
     }//draw
 
-    private int velocidad=(int) (Math.random() * 10 + 1);
     @Override
     public void run() {
         while (true) {

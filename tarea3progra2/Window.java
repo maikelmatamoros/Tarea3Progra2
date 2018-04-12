@@ -24,10 +24,14 @@ public class Window extends Application implements Runnable {
     private Scene scene;
     private Canvas canvas;
     private Thread thread;
+    private long wait;
+    private int FPS = 30;
+    private long time = 1000 / FPS;
+    private ArrayList<Circle> list;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Random Graphics");
+        primaryStage.setTitle("HomeWork Part 2");
         initComponents(primaryStage);
         primaryStage.show();
     }
@@ -42,6 +46,7 @@ public class Window extends Application implements Runnable {
 
         this.pane.getChildren().add(this.canvas);
         primaryStage.setScene(this.scene);
+
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
@@ -50,14 +55,10 @@ public class Window extends Application implements Runnable {
             }
         });
     }
-    private long espera;
-    private int FPS = 30;
-    private long tiempo = 1000 / FPS;
-    private ArrayList<Circle> list;
 
     public void initObjects() {
         this.list = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 80; i++) {
             this.list.add(new Circle());
             this.list.get(i).start();
         }
@@ -74,20 +75,21 @@ public class Window extends Application implements Runnable {
         while (true) {
 
             try {
+
                 gc.clearRect(0, 0, 800, 600);
-                for (int i = 0; i < 2; i++) {
-                    
+
+                for (int i = 0; i < 80; i++) {
+
                     this.list.get(i).draw(gc);
                 }
-
                 start = System.nanoTime();
-                // llamar a dibujar
                 elapsed = System.nanoTime() - start;
-                this.espera = this.tiempo - elapsed / 1000000;
-                if (this.espera < 0) {
-                    this.espera = 5;
+
+                this.wait = this.time - elapsed / 1000000;
+                if (this.wait < 0) {
+                    this.wait = 5;
                 }
-                Thread.sleep(this.espera);
+                Thread.sleep(this.wait);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
             }
