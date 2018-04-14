@@ -1,8 +1,3 @@
-/*
- * To change this license heapder, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domain;
 
 import java.util.Random;
@@ -11,11 +6,7 @@ import java.util.logging.Logger;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-/**
- *
- * @author maikel
- */
-public class Circle extends Thread {
+public class Figure extends Thread {
 
     private double originX;
     private double originY;
@@ -23,57 +14,56 @@ public class Circle extends Thread {
     private double finalY;
     private int velocidad;
     private Color color;
+    private int i;
 
-    public Circle() {
+    public Figure(int i) {
+        this.i = i;
         this.originX = new Random().nextInt(800 - 20);
         this.originY = new Random().nextInt(600 - 20);
         this.finalX = new Random().nextInt(800 - 20);
         this.finalY = new Random().nextInt(600 - 20);
         this.velocidad = (int) (Math.random() * 10) + 5;
         this.color = Color.rgb(new Random().nextInt(255), new Random().nextInt(255), new Random().nextInt(255));
-    }
-    
-    public void draw(GraphicsContext gc) {
+    } // constructor
 
+    public void draw(GraphicsContext gc) {
         gc.setFill(this.color);
-        gc.fillRect(originX, originY, 20, 20);
-    }//draw
+        if (this.i % 2 == 0) {
+            gc.fillRect(originX, originY, 20, 20);
+        } else {
+            gc.fillOval(originX, originY, 20, 20);
+        }
+    } // draw
 
     @Override
     public void run() {
-
         while (true) {
-
             try {
                 Thread.sleep(this.velocidad);
                 way();
             } catch (InterruptedException ex) {
-                Logger.getLogger(Circle.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Figure.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } // while
+    } // run
 
-        }
-    }
-  
     private void way() {
-        
-        double dx = finalX - originX;
+        double dx = this.finalX - this.originX;
         if (dx != 0) {
-            double m = (originY - finalY) / (originX - finalX);
-            double b = originY - ((originY - finalY) / (originX - finalX)) * originX;
-            if (finalX > originX) {
+            double m = (this.originY - this.finalY) / (this.originX - this.finalX);
+            double b = this.originY - ((this.originY - this.finalY) / (this.originX - this.finalX)) * originX;
+            if (this.finalX > this.originX) {
                 dx = 1;
             } else {
                 dx = -1;
             }
-
-            originX += dx;
-            originY = Math.round(m * originX + b);
-
+            this.originX += dx;
+            this.originY = Math.round(m * this.originX + b);
         } // if
-        if (originX == finalX) {
+        if (this.originX == this.finalX) {
             this.finalX = new Random().nextInt(800 - 20);
             this.finalY = new Random().nextInt(600 - 20);
-           
         }
-    }
-}
+    } // way
+
+} // fin de la clase

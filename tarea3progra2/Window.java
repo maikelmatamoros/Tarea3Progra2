@@ -1,6 +1,6 @@
 package tarea3progra2;
 
-import domain.Circle;
+import domain.Figure;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,14 +25,14 @@ public class Window extends Application implements Runnable {
     private long wait;
     private int FPS = 30;
     private long time = 1000 / FPS;
-    private ArrayList<Circle> list;
+    private ArrayList<Figure> list;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("HomeWork Part 2");
         initComponents(primaryStage);
         primaryStage.show();
-    }
+    } // start
 
     private void initComponents(Stage primaryStage) {
         this.pane = new Pane();
@@ -52,16 +52,15 @@ public class Window extends Application implements Runnable {
                 System.exit(0);
             }
         });
-    }
+    } // initComponents
 
     public void initObjects() {
         this.list = new ArrayList<>();
-        for (int i = 0; i < 200; i++) {
-            this.list.add(new Circle());
+        for (int i = 0; i < 300; i++) {
+            this.list.add(new Figure(i));
             this.list.get(i).start();
         }
-
-    }
+    } // initObjects
 
     @Override
     public void run() {
@@ -71,12 +70,9 @@ public class Window extends Application implements Runnable {
         long elapsed;
 
         while (true) {
-                    
             try {
-                
                 gc.clearRect(0, 0, 800, 600);
-
-                for (int i = 0; i < 200; i++) {
+                for (int i = 0; i < 100; i++) {
                     this.list.get(i).draw(gc);
                 }
                 start = System.nanoTime();
@@ -90,12 +86,11 @@ public class Window extends Application implements Runnable {
             } catch (InterruptedException ex) {
                 Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-
-    }
+        } // while
+    } // run
 
     public static void main(String arg[]) {
         launch(arg);
-    }
+    } // main
 
-}
+} // fin de la clase
