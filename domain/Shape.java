@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Figure extends Thread {
+public class Shape extends Thread {
 
     private double originX;
     private double originY;
@@ -16,7 +16,7 @@ public class Figure extends Thread {
     private Color color;
     private int i;
 
-    public Figure(int i) {
+    public Shape(int i) {
         this.i = i;
         this.originX = new Random().nextInt(800 - 20);
         this.originY = new Random().nextInt(600 - 20);
@@ -42,7 +42,7 @@ public class Figure extends Thread {
                 Thread.sleep(this.velocidad);
                 way();
             } catch (InterruptedException ex) {
-                Logger.getLogger(Figure.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Shape.class.getName()).log(Level.SEVERE, null, ex);
             }
         } // while
     } // run

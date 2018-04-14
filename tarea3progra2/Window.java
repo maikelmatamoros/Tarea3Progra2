@@ -1,6 +1,6 @@
 package tarea3progra2;
 
-import domain.Figure;
+import domain.Shape;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +25,7 @@ public class Window extends Application implements Runnable {
     private long wait;
     private int FPS = 30;
     private long time = 1000 / FPS;
-    private ArrayList<Figure> list;
+    private ArrayList<Shape> list;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -57,7 +57,7 @@ public class Window extends Application implements Runnable {
     public void initObjects() {
         this.list = new ArrayList<>();
         for (int i = 0; i < 300; i++) {
-            this.list.add(new Figure(i));
+            this.list.add(new Shape(i));
             this.list.get(i).start();
         }
     } // initObjects
