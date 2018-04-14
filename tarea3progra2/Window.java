@@ -2,7 +2,6 @@ package tarea3progra2;
 
 import domain.Circle;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -12,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -58,7 +56,7 @@ public class Window extends Application implements Runnable {
 
     public void initObjects() {
         this.list = new ArrayList<>();
-        for (int i = 0; i < 80; i++) {
+        for (int i = 0; i < 200; i++) {
             this.list.add(new Circle());
             this.list.get(i).start();
         }
@@ -73,13 +71,12 @@ public class Window extends Application implements Runnable {
         long elapsed;
 
         while (true) {
-
+                    
             try {
-
+                
                 gc.clearRect(0, 0, 800, 600);
 
-                for (int i = 0; i < 80; i++) {
-
+                for (int i = 0; i < 200; i++) {
                     this.list.get(i).draw(gc);
                 }
                 start = System.nanoTime();
