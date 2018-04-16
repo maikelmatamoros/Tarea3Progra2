@@ -56,7 +56,7 @@ public class Window extends Application implements Runnable {
 
     public void initObjects() {
         this.list = new ArrayList<>();
-        for (int i = 0; i < 300; i++) {
+        for (int i = 0; i < 200; i++) {
             this.list.add(new Shape(i));
             this.list.get(i).start();
         }
@@ -72,7 +72,7 @@ public class Window extends Application implements Runnable {
         while (true) {
             try {
                 gc.clearRect(0, 0, 800, 600);
-                for (int i = 0; i < 100; i++) {
+                for (int i = 0; i < 200; i++) {
                     this.list.get(i).draw(gc);
                 }
                 start = System.nanoTime();

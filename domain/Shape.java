@@ -12,7 +12,7 @@ public class Shape extends Thread {
     private double originY;
     private double finalX;
     private double finalY;
-    private int velocidad;
+    private int speed;
     private Color color;
     private int i;
 
@@ -22,7 +22,7 @@ public class Shape extends Thread {
         this.originY = new Random().nextInt(600 - 20);
         this.finalX = new Random().nextInt(800 - 20);
         this.finalY = new Random().nextInt(600 - 20);
-        this.velocidad = (int) (Math.random() * 10) + 5;
+        this.speed = (int) (Math.random() * 10) + 5;
         this.color = Color.rgb(new Random().nextInt(255), new Random().nextInt(255), new Random().nextInt(255));
     } // constructor
 
@@ -39,15 +39,15 @@ public class Shape extends Thread {
     public void run() {
         while (true) {
             try {
-                Thread.sleep(this.velocidad);
-                way();
+                Thread.sleep(this.speed);
+                route();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Shape.class.getName()).log(Level.SEVERE, null, ex);
             }
         } // while
     } // run
 
-    private void way() {
+    private void route() {
         double dx = this.finalX - this.originX;
         if (dx != 0) {
             double m = (this.originY - this.finalY) / (this.originX - this.finalX);

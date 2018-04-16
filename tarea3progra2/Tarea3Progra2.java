@@ -24,21 +24,17 @@ public class Tarea3Progra2 extends JPanel {
     } // draw
 
     private void linearFunction(Graphics g, double x0, double y0, double x1, double y1) {
-        double dx = x1 - x0;
-        if (dx != 0) {
-            double m = (y0 - y1) / (x0 - x1);
-            double b = y0 - ((y0 - y1) / (x0 - x1)) * x0;
-            if (x1 > x0) {
-                dx = 1;
-            } else {
-                dx = -1;
-            }
-            while (x0 != x1) {
-                x0 += dx;
-                y0 = Math.round(m * x0 + b);
-                g.drawLine((int) x0, (int) y0, (int) x0, (int) y0);
-            } // while
-        } // if
+        if (y0 > y1) {
+            double aux = y0;
+            y0 = y1;
+            y1 = aux;
+        }
+        while (y0 <= y1) {
+            double hypotenuse = Math.sqrt(Math.pow(x1 - x0, 2) + Math.pow(y1 - y0, 2));
+            x0 += (x1 - x0) / hypotenuse;
+            y0 += (y1 - y0) / hypotenuse;
+            g.drawLine((int) x0, (int) y0, (int) x0, (int) y0);
+        } // while
     }// linearFunction
 
     @Override
@@ -48,7 +44,6 @@ public class Tarea3Progra2 extends JPanel {
     } // paintComponent
 
     public static void main(String[] args) {
-        System.out.println("Hola mundo!!");
         JFrame window = new JFrame("Graphing Function");
         window.setContentPane(new Tarea3Progra2());
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
