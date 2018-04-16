@@ -14,11 +14,11 @@ public class Tarea3Progra2 extends JPanel {
 
     private int numRandom(int n) {
         return (int) (Math.random() * n) + 1;
-    } // numRandom
+    } // numRandom: devuelve num aleatorio de 0 hasta n
 
     private void draw(Graphics g) {
         for (int i = 0; i < 1000; i++) {
-            g.setColor(new Color(numRandom(255), numRandom(255), numRandom(255)));
+            g.setColor(new Color(numRandom(255), numRandom(255), numRandom(255))); // crea colores aleatorios
             linearFunction(g, numRandom(800), numRandom(600), numRandom(800), numRandom(600));
         } // for
     } // draw
@@ -35,7 +35,7 @@ public class Tarea3Progra2 extends JPanel {
             y0 += (y1 - y0) / hypotenuse;
             g.drawLine((int) x0, (int) y0, (int) x0, (int) y0);
         } // while
-    }// linearFunction
+    } // linearFunction: dibuja linea de (x0, y0) a (x1, y1) basandose en el Teorema de Tales
 
     @Override
     protected void paintComponent(Graphics g) {

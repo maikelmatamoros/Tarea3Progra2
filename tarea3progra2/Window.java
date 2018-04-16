@@ -16,8 +16,8 @@ import javafx.stage.WindowEvent;
 
 public class Window extends Application implements Runnable {
 
-    private final int WIDTH = 800;
-    private final int HEIGHT = 600;
+    private final int WIDTH = 1200;
+    private final int HEIGHT = 700;
     private Pane pane;
     private Scene scene;
     private Canvas canvas;
@@ -56,7 +56,7 @@ public class Window extends Application implements Runnable {
 
     public void initObjects() {
         this.list = new ArrayList<>();
-        for (int i = 0; i < 200; i++) {
+        for (int i = 0; i < 100; i++) {
             this.list.add(new Shape(i));
             this.list.get(i).start();
         }
@@ -71,8 +71,8 @@ public class Window extends Application implements Runnable {
 
         while (true) {
             try {
-                gc.clearRect(0, 0, 800, 600);
-                for (int i = 0; i < 200; i++) {
+                gc.clearRect(0, 0, 1200, 700);
+                for (int i = 0; i < 100; i++) {
                     this.list.get(i).draw(gc);
                 }
                 start = System.nanoTime();

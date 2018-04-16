@@ -15,13 +15,15 @@ public class Shape extends Thread {
     private int speed;
     private Color color;
     private int i;
+    private int aux;
 
     public Shape(int i) {
         this.i = i;
-        this.originX = new Random().nextInt(800 - 20);
-        this.originY = new Random().nextInt(600 - 20);
-        this.finalX = new Random().nextInt(800 - 20);
-        this.finalY = new Random().nextInt(600 - 20);
+        this.aux = 0;
+        this.originX = new Random().nextInt(1200 - 20);
+        this.originY = new Random().nextInt(700 - 20);
+        this.finalX = new Random().nextInt(1200 - 20);
+        this.finalY = new Random().nextInt(700 - 20);
         this.speed = (int) (Math.random() * 10) + 5;
         this.color = Color.rgb(new Random().nextInt(255), new Random().nextInt(255), new Random().nextInt(255));
     } // constructor
@@ -47,23 +49,23 @@ public class Shape extends Thread {
         } // while
     } // run
 
-    private void route() {
-        double dx = this.finalX - this.originX;
-        if (dx != 0) {
-            double m = (this.originY - this.finalY) / (this.originX - this.finalX);
-            double b = this.originY - ((this.originY - this.finalY) / (this.originX - this.finalX)) * originX;
-            if (this.finalX > this.originX) {
-                dx = 1;
-            } else {
-                dx = -1;
-            }
-            this.originX += dx;
-            this.originY = Math.round(m * this.originX + b);
-        } // if
-        if (this.originX == this.finalX) {
-            this.finalX = new Random().nextInt(800 - 20);
-            this.finalY = new Random().nextInt(600 - 20);
+    private void route() { // crea la ruta del punto (originX,originY) al punto(finalX,finalY)
+        double hipotenusa = Math.sqrt(Math.pow(this.finalX - this.originX, 2) + Math.pow(this.finalY - this.originY, 2));
+        this.originX += (this.finalX - this.originX) / hipotenusa;
+        this.originY += (this.finalY - this.originY) / hipotenusa;
+
+        if (originY > finalY) {
+            aux = 1;
         }
-    } // way
+        if (aux == 1 && this.originY <= this.finalY) {
+            this.finalX = new Random().nextInt(1200 - 20);
+            this.finalY = new Random().nextInt(700 - 20);
+            aux = 0;
+        } else if (aux == 0 && this.originY >= this.finalY) {
+            this.finalX = new Random().nextInt(1200 - 20);
+            this.finalY = new Random().nextInt(700 - 20);
+            aux = 0;
+        }
+    } // route
 
 } // fin de la clase
